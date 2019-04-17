@@ -1,0 +1,49 @@
+<style>
+ *{
+     margin: 0;
+     padding: 0;
+}
+
+
+.mytxt:focus {
+     border: 1px solid #fafafa;
+    -webkit-box-shadow: 0px 0px 6px #007eff;
+     -moz-box-shadow: 0px 0px 5px #007eff;
+     box-shadow: 0px 0px 5px #007eff;
+
+}
+.ButtonStyle{
+	width: 100px; /* 宽度 */
+	height: 50px; /* 高度 */
+	border-width: 1px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: white; /* 字体颜色 */
+	font-size: 18px; /* 字体大小 */
+}
+.ActiveButtonStyle:hover{
+    background: #5599FF;
+}
+
+.errcode{
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: red; /* 字体颜色 */
+	font-size: 20px; /* 字体大小 */
+	visibility:hidden;
+}
+.formstyle{
+	margin-left:10px;
+	margin-top:50px ;
+	padding-bottom:5px;
+	font-size: 30px;
+
+}
+
+.bg{
+
+  background-color: #84C1FF;
+}
+</style>
