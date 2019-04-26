@@ -21,6 +21,7 @@ class UserInfo(models.Model):
         return self.Username
 # 文章分类
 class TestLog(models.Model):
+    Customer = models.CharField('Customer', max_length=10, default="", )
     Project = models.CharField('Project', max_length=100,default="",)
     Unit = models.CharField('Unit', max_length=100,default="",)
     Phase = models.CharField('Phase', max_length=10,default="",)

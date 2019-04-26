@@ -1,72 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}主界面{% endblock %}
 
-  <title>主界面</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Page level plugin CSS-->
-  <link href="../static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="../static/css/sb-admin.css" rel="stylesheet">
-  <link rel = "stylesheet"  type = "text/css"  href = "../static/css/test.css" />
-</head>
-<body bgcolor="#84C1FF">
-<div class="head">
-      <h1 ><font color="#FFDC35">DQA3機構測試管理系統 </font>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">{{ time }}</a></li>
-            <li><a href="#">Online：{{ request.session.user_name }}</a></li>
-            <li><a href="/logout/">Logout</a></li>
-        </ul>
-      </h1>
-{#        <ul class="nav navbar-nav navbar-right">#}
-{#            <li><a href="#">{{ time }}</a></li>#}
-{#            <li><a href="#">Online：{{ request.session.user_name }}</a></li>#}
-{#            <li><a href="/logout/">Logout</a></li>#}
-{#        </ul>#}
-      <!-- <hr color="#FFDC35" />  -->
-
-      <div id="wrapper">
-
-      	<!-- sidebar -->
-      	<ul class="sidebar navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/dashboard-project/">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Dashboard project</span>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/dashboard-units/">
-            <i class="fas fa-fw fa-tv"></i>
-            <span>Dashboard unit</span>
-            </a>
-          <li class="nav-item active">
-            <a class="nav-link" href="/index/">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Test plan</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>System setting</span></a>
-          </li>
-        </ul>
-
+{% block content %}
         <!-- 幾台與phase選擇 -->
 
-        <div id="content-wrapper">
+    <div id="content-wrapper">
 
-          <div class="container-fluid">
+      <div class="container-fluid">
 
 
         <!-- Breadcrumbs-->
@@ -76,7 +17,19 @@
                  <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Overview</li> -->
-
+                 <div class="input-group-sm">
+    {#			    <span class="input-group-addon" style="padding-right: 5px;">Project</span><input type="text" class="form-control-sm" >#}
+                    <span class="input-group-addon" style="padding-left: 25px;padding-right: 5px">Customer</span><select class="form-control-sm" name="Customer">
+                                    <option value="Selected Customer">Selected Customer</option>
+                                    <option value="C38(NB)">C38(NB)</option>
+                                    <option value="C38(AIO)">C38(AIO)</option>
+                                    <option value="A39">A39</option>
+                                    <option value="Other">Other</option>
+                                  </select>
+                    {% if messagec %}
+                        <div class="alert alert-warning" style="margin-left: 25px;">{{ messagec }}</div>
+                    {% endif %}
+                 </div>
                  <div class="input-group-sm">
     {#			    <span class="input-group-addon" style="padding-right: 5px;">Project</span><input type="text" class="form-control-sm" >#}
                     <span class="input-group-addon" style="padding-left: 25px;padding-right: 5px">Phase</span><select class="form-control-sm" name="Phase">
@@ -86,36 +39,39 @@
                                     <option value="INV">INV</option>
                                     <option value="Other">Other</option>
                                   </select>
-                     {% if messagep %}
-                        <div class="alert alert-warning" style="margin-left: 20px;">{{ messagep }}</div>
+                    {% if messagep %}
+                        <div class="alert alert-warning" style="margin-left: 25px;">{{ messagep }}</div>
                     {% endif %}
                  </div>
                </ol>
                <!-- <div class="container-fluid"> -->
-                <div class="breadcrumb">
+    <div class="breadcrumb">
                 <!-- <div class="row"> -->
                     <div class="col-md-4">
                         <div class="card-body">
                         <div class="input" style="padding-top: 30px;">
-                  <center>
-                       Units<Br> <input type="text" class="form-control-sm" name="Units">
-                 </center>
-                <!-- </div> -->
-                    {% if message %}
-                        <div class="alert alert-warning" style="margin-left: 20px;">{{ message }}</div>
-                    {% endif %}
-                </div>
-                </div>
+                            <center>
+                                   Units<Br> <input type="text" class="form-control-sm" name="Units">
+                            </center>
+                        <!-- </div> -->
+                            {% if message %}
+                                <div class="alert alert-warning" style="margin-left: 20px;">{{ message }}</div>
+                            {% endif %}
+                        </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card-body">
                         <div class="input" style="padding-top: 30px;">
-                  <center>
-                       Item<Br> <input type="text" class="form-control-sm" name="Item">
-                 </center>
-                <!-- </div> -->
-                </div>
-                </div>
+                            <center>
+                                Item<Br> <input type="text" class="form-control-sm" name="Item">
+                            </center>
+                            {% if messagei %}
+                                <div class="alert alert-warning" style="margin-left: 20px;">{{ messagei }}</div>
+                            {% endif %}
+                    <!-- </div> -->
+                        </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card-body">
@@ -123,10 +79,17 @@
                         <center>
                        Comments<Br> <input type="text" class="form-control-sm" name="Comments">
                       </center>
-                <!-- </div> -->
-                </div>
-                </div>
+                    <!-- </div> -->
+                        </div>
+                        </div>
                     </div>
+
+                  <div class="col-md-4 offset-4">
+                    {% if message_se %}
+                        <div class="alert alert-warning">{{ message_se }}</div>
+                    {% endif %}
+                  </div>
+
                     <div class="col-md-1 offset-4"style="padding-top: 30px;">
                         <button type="submit" class="btn btn-primary" {{ actstatus }} name="start">Start</button>
                         {% csrf_token %}
@@ -137,83 +100,69 @@
                     </div>
                     <div class="col-md-12" style="padding-top: 30px;">
 
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Plan list</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Time</th>
-                    <th>Unit</th>
-                    <th>Test Project</th>
-                    <th>Status</th>
-                  </tr>
-                  <tbody>
-                  <tr>
-                    <td>2019/04/13 11:03:00</td>
-                    <td>EL45101011</td>
-                    <td>Drop</td>
-                    <td>PASS</td>
-                  </tr>
-                  <tr>
-                    <td>2019/04/13 11:03:00</td>
-                    <td>EL45101011</td>
-                    <td>Drop</td>
-                    <td>PASS</td>
-                  </tr>
-                  <tr>
-                    <td>2019/04/13 11:03:00</td>
-                    <td>EL45101011</td>
-                    <td>Drop</td>
-                    <td>PASS</td>
-                  </tr>
-                  <tr>
-                    <td>2019/04/13 11:03:00</td>
-                    <td>EL45101011</td>
-                    <td>Drop</td>
-                    <td>PASS</td>
-                  </tr>
-                  
-                  </tbody>
-                </thead>
-              </table>
-            </div>
-          </div>
-      
-      </div>
-      </div>
+                        <div class="card-header">
+
+                        <i class="fas fa-table"></i>
+
+                        Plan list under testing</div>
+
+                        <div class="card-body">
+
+                        <div class="table-responsive" style="max-height: 500px;">
+
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                            <thead>
+
+                              <tr>
+
+                                <th>Customer</th>
+                                <th>Project</th>
+                                <th>Unit</th>
+                                <th>Phase</th>
+                                <th>Item</th>
+                                <th>Tester</th>
+                                <th>Start_time</th>
+                                <th>End_time</th>
+                                <th>Comments</th>
+                              </tr>
+
+                              <tbody>
+
+                                  {% for line in test_list %}
+                                        <tr>
+                                            <td>{{line.Customer}}</td>
+                                            <td>{{line.Project}}</td>
+                                            <td>{{line.Unit}}</td>
+                                            <td>{{line.Phase}}</td>
+                                            <td>{{line.Testitem}}</td>
+                                            <td>{{line.Tester}}</td>
+                                            <td>{{line.Start_time}}</td>
+                                            <td>{{line.End_time}}</td>
+                                            <td>{{line.Comments}}</td>
+                                        </tr>
+                                  {% endfor %}
+
+                              </tbody>
+
+                            </thead>
+
+                          </table>
+
+                        </div>
+
+                      </div>
+
+
+
+                    </div>
+
+    </div>
+
     </form>
-          	</div>
-          </div>
-          <!-- </div> -->
 
-         <!--  </div> -->
-         
-         	
-         
+      </div>
 
-         
-     </div>
+    </div>
 
-</div>
-<script src="../static/vendor/jquery/jquery.min.js"></script>
-  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="../static/vendor/chart.js/Chart.min.js"></script>
-  <script src="../static/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="../static/js/sb-admin.min.js"></script>
-
-  <!-- Demo scripts for this page-->
-  <script src="../static/js/demo/datatables-demo.js"></script>
-  <script src="../static/js/demo/chart-area-demo.js"></script>
-</body>
-</html>
+{% endblock %}

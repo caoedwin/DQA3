@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'app1.apps.App1Config',
     'DjangoUeditor', #注册APP应用
     'captcha',
+    'rbac'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rbac.middleware.rbac.RbacMiddleware'  # 加入自定义的中间件到最后
 ]
 
 ROOT_URLCONF = 'me.urls'
@@ -142,8 +145,37 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SESSION_COOKIE_AGE = 30 * 60
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
+# 定义session 键：
+# 保存用户权限url列表
+# 保存 权限菜单 和所有 菜单
 # session_permisson_key
-SESSION_PERMISSION_URL_KEY = "perUrl"
-SESSION_MENU_KEY = "menu"
-MENU_ALL = "menuAll"
-MENU_PERMISSON = "menuPer"
+# SESSION_PERMISSION_URL_KEY = "perUrl"
+# SESSION_MENU_KEY = "menu"
+# MENU_ALL = "menuAll"
+# MENU_PERMISSON = "menuPer"
+SESSION_PERMISSION_URL_KEY = 'cool'
+
+SESSION_MENU_KEY = 'awesome'
+ALL_MENU_KEY = 'k1'
+PERMISSION_MENU_KEY = 'k2'
+
+LOGIN_URL = '/login/'
+REGEX_URL = r'^{url}$'  # url作严格匹配
+
+# 配置url权限白名单
+# 不需要做菜单权限管理所以将所有菜单都加到白名单
+SAFE_URL = [
+    '/admin/.*',
+    r'/login/',
+    r'/logout/',
+    '/Change_Password/',
+    '/index/',
+    '/dashboard-project/',
+    '/dashboard-units/',
+    '^/rbac/',
+    '^media/(?P<path>.*)',
+    '^static/(?P<path>.*)',
+    # '/test/',
+    # '/index/',
+    # '^/rbac/',
+]

@@ -18,6 +18,7 @@ from django.urls import path
 
 from django.contrib import admin
 from django.urls import path, include , re_path
+from django.conf.urls import url, include
 #留意上面这行比原来多了一个include
 from django.views.static import serve
 #导入静态文件模块
@@ -30,13 +31,29 @@ urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     #path('d:\\me\\HelloWorld\\HelloWorld.py',hello)
     path(r'', views.login),
+    # path(r'', views.index),
     path(r'login/', views.login),
+    path(r'logout/', views.logout),
+    path(r'Change_Password/', views.Change_Password),
     #url(r'^$', main.html),
     #path('templates/', view.hello, name='index'),
     path(r'index/', views.index),
     path(r'dashboard-project/', views.DashboardProject),
     path(r'dashboard-units/', views.DashboardUnits),
+    path(r'rbac/', include('rbac.urls') ),
     path('ueditor/', include('DjangoUeditor.urls')), #添加DjangoUeditor的URL
     re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),#增加此行
-    re_path('^statuc/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),#增加此行
+    re_path('^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),#增加此行
+    path(r'', views.login),
+    # url(r'^admin/', admin.site.urls),
+    # # url(r'',views.login()),
+    # url(r'^login/$', views.login),
+    # url(r'^logout/$', views.logout),
+    # url(r'^Change_Password/$', views.Change_Password),
+    # url(r'^index/$', views.index),
+    # url(r'^dashboard-project/$', views.DashboardProject),
+    # url(r'^dashboard-units/$', views.DashboardUnits),
+    # url(r'^rbac/', include('rbac.urls') ),
+    # re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),#增加此行
+    # re_path('^statuc/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),#增加此行
 ]

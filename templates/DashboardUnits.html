@@ -1,61 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-		<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}主界面{% endblock %}
 
-  <title>dashboard units</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Page level plugin CSS-->
-  <link href="../static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="../static/css/sb-admin.css" rel="stylesheet">
-  <link rel = "stylesheet"  type = "text/css"  href = "../static/css/test.css" />
-	
-</head>
-<body>
-
-<div class="head">
-      <h1 ><font color="#FFDC35">DQA3機構測試管理系統 </font></h1>
-      <!-- <hr color="#FFDC35" />  -->
-
-      <div id="wrapper">
-
-      	<!-- sidebar -->
-      	<ul class="sidebar navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/dashboard-project/">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Dashboard project</span>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/dashboard-units/">
-            <i class="fas fa-fw fa-tv"></i>
-            <span>Dashboard unit</span>
-            </a>
-          <li class="nav-item active">
-            <a class="nav-link" href="/index/">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Test plan</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>System setting</span></a>
-          </li>
-        </ul>
-
-        <!-- 幾台與phase選擇 -->
-
-        <div id="content-wrapper">
+{% block content %}
+    <div id="content-wrapper">
 
           <div class="container-fluid">
 
@@ -66,7 +14,7 @@
              <a href="#">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">Overview</li> -->
-           
+
 
              <div class="input-group-sm">
 			    <span class="input-group-addon" style="padding-right: 5px;">Project</span><input type="text" class="form-control-sm" >
@@ -81,8 +29,4 @@
 		   </ol>
 		</div>
 	</div>
-
-		   <!-- <div class="container-fluid"> 
-
-</body>
-</html>
+{% endblock %}
