@@ -26,12 +26,13 @@ from django.conf import settings
 #导入配置文件里的文件上传配置
 from app1 import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #url(r'^admin/', admin.site.urls),
     #path('d:\\me\\HelloWorld\\HelloWorld.py',hello)
-    path(r'', views.login),
-    # path(r'', views.index),
+    # path(r'', views.login),
+    path(r'', views.index),
     path(r'login/', views.login),
     path(r'logout/', views.logout),
     path(r'Change_Password/', views.Change_Password),

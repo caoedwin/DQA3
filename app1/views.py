@@ -9,7 +9,7 @@ from .models import TestLog
 from rbac.models import UserInfo
 from rbac.service.init_permission import init_permission
 import datetime
-
+import json
 
 def login(request):
     # return HttpResponse("hello world")
@@ -63,7 +63,7 @@ def login(request):
     # 3 session
     # 不允许重复登录
     if request.session.get('is_login', None):
-        return redirect('/login/')
+        return redirect('/index/')
     # print(request.method)
     # print('test')
     if request.method == "POST":
@@ -75,10 +75,10 @@ def login(request):
         user_obj = UserInfo.objects.filter(account=Account, password=Password).first()
         # print (Account)
         # print (Password)
-        print (user_obj)
+        # print (user_obj)
         try:
             user = UserInfo.objects.get(account=Account)
-            print (user.password)
+            # print (user.password)
             if user.password == Password:
                 # 往session字典内写入用户状态和数据,你完全可以往里面写任何数据，不仅仅限于用户相关！
                 request.session['is_login'] = True
@@ -158,12 +158,11 @@ def index(request):
     End_time = "first"
     test_list = TestLog.objects.filter(End_time="")
     # print('12')
-    print (request.method)
+    # print (request.method)
     # print (request.POST)
     # print (request.GET)
 
     if request.method == "POST":
-        actstatus = ""
         # print('11')
         # Test_form = testplanForm(request.POST)
         # Project_Unit = Test_form.cleaned_data['Unit']
@@ -236,18 +235,23 @@ def index(request):
                                 # test_log.End_time = End_time
                                 test_log.save()
                                 message_se = r"%s %s %s %s Start test %s"%(Customer,Project,Phase,Unit,Testitem)
+                                actstatus = ""
                             return render(request, 'index.html', locals())
                         else:
                             messagei = "Please choose Item"
+                            actstatus = ""
                             return render(request, 'index.html', locals())
                     else:
                         messagep="Please choose Phase"
+                        actstatus = ""
                         return render(request, 'index.html', locals())
                 else:
                     message="len of Units is not 10"
+                    actstatus = ""
                     return render(request, 'index.html', locals())
             else:
                 messagec="Please choose Customer"
+                actstatus = ""
                 return render(request, 'index.html', locals())
 
         if 'end' in request.POST:
@@ -274,28 +278,35 @@ def index(request):
                                 # print('t')
                                 update.update(End_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 message_se = r"%s %s %s %s %s test finished" % (Customer, Project, Phase, Unit, Testitem)
+                                actstatus = ""
                                 # for e in update:
                                 #     e.End_time= datetime.datetime.now()
                             else:
                                 # actstatus_end = r'disabled="disabled"'
                                 message_se = r"Please start the test first"
+                                actstatus = ""
                             return render(request, 'index.html', locals())
                         else:
                             messagei = "Please choose Item"
+                            actstatus = ""
                             return render(request, 'index.html', locals())
                     else:
                         messagep="Please choose Phase"
+                        actstatus = ""
                         return render(request, 'index.html', locals())
 
                 else:
                     message = "len of Units is not 10"
+                    actstatus = ""
                     return render(request, 'index.html', locals())
             else:
                 messagec = "Please choose Customer"
+                actstatus = ""
                 return render(request, 'index.html', locals())
     # else:
-    #     print('fresh')
-    #     return render(request, 'index.html', locals())
+    #     while 1:
+    #         print('fresh')
+    #         return render(request, 'index.html', locals())
 
     # Test_form = testplanForm()
     return render(request, 'index.html', locals())
@@ -311,5 +322,43 @@ def DashboardProject(request):
 def DashboardUnits(request):
     # 跳轉頁面
     context = {}
+    JSONObject={}
     context['hello'] = '主界面'
-    return render(request, 'DashboardUnits.html', context)
+    print(request.method)
+    if not request.session.get('is_login', None):
+        return redirect('/login/')
+    print(request.is_ajax())
+    if request.is_ajax():
+    # if request.method == "POST":
+        Project = request.POST.get("project")
+        JSONObject = {
+            "x": "30",
+            "y": "70",
+            "x0y1": "1#01",
+            "x0y2": "1#02",
+            "x0y3": "1#02",
+            "x0y4": "1#02",
+            "x0y5": "1#02",
+            "x0y6": "1#02",
+            "x0y7": "1#02",
+            "x0y8": "1#02",
+            "x0y9": "1#02",
+            "x0y10": "1#02",
+            "x1y0": "H1-Vib",
+            "x2y0": "H1-2-shock",
+            "x3y0": "H1-3-hinge",
+            "x4y0": "H1-5-POGO",
+            "x5y0": "I/O-LIFE",
+            "x6y0": "Rework",
+            "x1y3": "2",
+            "x2y4": "5",
+            "x3y3": "6"
+        };
+        JSONObject['x1y0'] = Project
+        print (Project)
+        print (type(json.dumps(JSONObject)))
+        print (type(JSONObject))
+        print(request.is_ajax())
+        # return render(request, 'DashboardUnits.html', {'JSONObject':json.dumps(JSONObject)})
+        return HttpResponse(json.dumps(JSONObject),content_type="application/json")
+    return render(request, 'DashboardUnits.html',{'JSONObject':json.dumps(JSONObject)})

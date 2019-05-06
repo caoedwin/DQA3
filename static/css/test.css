@@ -44,3 +44,41 @@
 	font-size: 30px;
 
 }
+.table7_7 table {
+	width:100%;
+	margin:15px 0
+}
+.table7_7 th {
+	max-width: 80px ;
+    min-width: 80px;
+    height: 30px;
+    table-layout: fixed;
+	background-color:#00A5FF;
+	background:-o-linear-gradient(90deg, #00A5FF, #6dcbfe);
+	background:-moz-linear-gradient( center top, #00A5FF 5%, #6dcbfe 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00A5FF), color-stop(1, #6dcbfe) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A5FF', endColorstr='#6dcbfe');
+	color:#FFFFFF
+}
+.table7_7,.table7_7 th,.table7_7 td
+{
+    max-width: 80px ;
+    min-width: 80px;
+    height: 30px;
+	/*font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-bottom:1px solid #efefef;
+	border-collapse:collapse*/
+	table-Layout:fixed;
+}
+.table7_7 tr:nth-child(odd){
+	background-color:#aae1fe;
+	background:-o-linear-gradient(90deg, #aae1fe, #eef9fe);
+	background:-moz-linear-gradient( center top, #aae1fe 5%, #eef9fe 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #aae1fe), color-stop(1, #eef9fe) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#aae1fe', endColorstr='#eef9fe');
+}
+.table7_7 tr:nth-child(even){
+	background-color:#fdfdfd;
+}
